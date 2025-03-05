@@ -3,62 +3,63 @@ import java.util.regex.*;
 import java.lang.Math;
 
 public class AdvancedCalculator {
-  // to store user variable
+  // To store user variables
   private static final Map<String, Double> memory = new HashMap<>();
-  private static double result = 0.0; // to stoer ther result
+  private static double result = 0.0; // To store the result
   private static final Scanner scanner = new Scanner(System.in);
-  private static String pendingOperator = null; // keeping track of operator
+  private static String pendingOperator = null; // Keeping track of operator
+
+  // Color codes for terminal output
+  public static final String RESET = "\033[0m";
+  public static final String RED = "\033[1;31m";
+  public static final String BLUE = "\033[1;34m";
+  public static final String GREEN = "\033[1;32m";
+  public static final String CYAN = "\033[1;36m";
+  public static final String MAGENTA = "\033[1;35m";
+  public static final String YELLOW = "\033[1;33m";
 
   public static void main(String[] args) {
-    // print screen
-    System.out.println("A Calculator by Syed Md Farhan E Azam");
-    System.out.println("Operations: +, -, *, /, ^ (power), % (modulo), sqrt, ! (factorial)");
-    System.out.println("Trigonometric: sin, cos, tan, sec, cosec, cot");
-    System.out.println("Logarithmic: log (base 10), ln (natural log)");
-    System.out.println("Commands: save <var>, recall <var>, clear, exit");
-    // inifinite loop to keep taking entry
+    // Display welcome message
+    System.out.println(RED + "A Calculator by Syed Md Farhan E Azam" + RESET);
+    System.out
+        .println(BLUE + "Operations: " + GREEN + "+, -, *, /, ^ (power), % (modulo), sqrt, ! (factorial)" + RESET);
+    System.out.println(BLUE + "Trigonometric: " + MAGENTA + "sin, cos, tan, sec, cosec, cot" + RESET);
+    System.out.println(BLUE + "Logarithmic: " + CYAN + "log (base 10), ln (natural log)" + RESET);
+    System.out.println(YELLOW + "Commands: " + "save " + CYAN + "<var>" + RESET + ", " + YELLOW + "recall " + CYAN
+        + "<var>" + RESET + ", " + YELLOW + "clear" + RESET + ", " + YELLOW + "exit" + RESET);
+
     while (true) {
-      System.out.print("-----------> ");
-      // removes spaces and avoids errors
+      System.out.print(GREEN + "-----------> " + RESET);
       String input = scanner.nextLine().trim();
 
       if (input.equalsIgnoreCase("exit")) {
-        System.out
-            .println("-----------------------------------------  Exiting -----------------------------------------");
-        // exit satement
+        System.out.println(RED
+            + "-----------------------------------------  Exiting -----------------------------------------" + RESET);
         break;
       }
-
       if (input.equalsIgnoreCase("clear")) {
         result = 0;
         pendingOperator = null;
-        // clearing ther entire log
-        System.out
-            .println("-----------------------------------------  Cleared -----------------------------------------");
+        System.out.println(YELLOW
+            + "-----------------------------------------  Cleared -----------------------------------------" + RESET);
         continue;
       }
-
       if (input.startsWith("save ")) {
         String varName = input.substring(5).trim();
         memory.put(varName, result);
-        System.out.println("Saved: " + varName + " = " + result);
+        System.out.println(CYAN + "Saved: " + varName + " = " + result + RESET);
         continue;
       }
-      // new recall function to see what ialias runcalc='cd
-      // /home/azam/UBUNTU/work/PROJECTS/javaCalculator && java AdvancedCalculator'e
-      // privious variable
       if (input.startsWith("recall ")) {
         String varName = input.substring(7).trim();
         if (memory.containsKey(varName)) {
           result = memory.get(varName);
-          System.out.println("Recalled: " + varName + " = " + result);
+          System.out.println(MAGENTA + "Recalled: " + varName + " = " + result + RESET);
         } else {
-          System.out.println("Error: Variable not found.");
+          System.out.println(RED + "Error: Variable not found." + RESET);
         }
         continue;
       }
-      // erroe catrch
-      // try
       try {
         if (isNumeric(input)) {
           if (pendingOperator != null) {
@@ -73,10 +74,9 @@ public class AdvancedCalculator {
         } else {
           result = evaluateExpression(input);
         }
-        System.out.println("Result: " + result);
+        System.out.println(BLUE + "Result: " + result + RESET);
       } catch (Exception e) {
-        // handling multiple signs
-        System.out.println("Error in expression.");
+        System.out.println(RED + "Error in expression." + RESET);
       }
     }
   }
@@ -86,7 +86,6 @@ public class AdvancedCalculator {
     for (String key : memory.keySet()) {
       expression = expression.replace(key, memory.get(key).toString());
     }
-
     if (expression.matches("sin\\(.*\\)"))
       return Math.sin(Math.toRadians(extractNumber(expression)));
     if (expression.matches("cos\\(.*\\)"))
@@ -107,22 +106,17 @@ public class AdvancedCalculator {
       return Math.sqrt(extractNumber(expression));
     if (expression.matches(".*!"))
       return factorial((int) extractNumber(expression));
-
     return evaluateMath(expression);
   }
 
   private static double evaluateMath(String expression) throws Exception {
-    expression = expression.replaceAll("\\s+", "");
-    expression = expression.replaceAll("--", "+");
-
+    expression = expression.replaceAll("\\s+", "").replaceAll("--", "+");
     Pattern pattern = Pattern.compile("(-?\\d+(\\.\\d+)?)([+\\-*/%^])(-?\\d+(\\.\\d+)?)");
     Matcher matcher = pattern.matcher(expression);
-
     if (matcher.find()) {
       double num1 = Double.parseDouble(matcher.group(1));
       double num2 = Double.parseDouble(matcher.group(4));
       char operator = matcher.group(3).charAt(0);
-
       return applyOperation(num1, num2, String.valueOf(operator));
     }
     throw new Exception("Invalid expression");
