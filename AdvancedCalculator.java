@@ -3,31 +3,38 @@ import java.util.regex.*;
 import java.lang.Math;
 
 public class AdvancedCalculator {
+  // to store user variable
   private static final Map<String, Double> memory = new HashMap<>();
-  private static double result = 0.0;
+  private static double result = 0.0; // to stoer ther result
   private static final Scanner scanner = new Scanner(System.in);
-  private static String pendingOperator = null;
+  private static String pendingOperator = null; // keeping track of operator
 
   public static void main(String[] args) {
-    System.out.println("Advanced Scientific Calculator");
+    // print screen
+    System.out.println("A Calculator by Syed Md Farhan E Azam");
     System.out.println("Operations: +, -, *, /, ^ (power), % (modulo), sqrt, ! (factorial)");
     System.out.println("Trigonometric: sin, cos, tan, sec, cosec, cot");
     System.out.println("Logarithmic: log (base 10), ln (natural log)");
     System.out.println("Commands: save <var>, recall <var>, clear, exit");
-
+    // inifinite loop to keep taking entry
     while (true) {
-      System.out.print("Enter number or expression: ");
+      System.out.print("-----------> ");
+      // removes spaces and avoids errors
       String input = scanner.nextLine().trim();
 
       if (input.equalsIgnoreCase("exit")) {
-        System.out.println("Exiting Calculator...");
+        System.out
+            .println("-----------------------------------------  Exiting -----------------------------------------");
+        // exit satement
         break;
       }
 
       if (input.equalsIgnoreCase("clear")) {
         result = 0;
         pendingOperator = null;
-        System.out.println("Cleared. Start new calculation.");
+        // clearing ther entire log
+        System.out
+            .println("-----------------------------------------  Cleared -----------------------------------------");
         continue;
       }
 
@@ -37,7 +44,9 @@ public class AdvancedCalculator {
         System.out.println("Saved: " + varName + " = " + result);
         continue;
       }
-
+      // new recall function to see what ialias runcalc='cd
+      // /home/azam/UBUNTU/work/PROJECTS/javaCalculator && java AdvancedCalculator'e
+      // privious variable
       if (input.startsWith("recall ")) {
         String varName = input.substring(7).trim();
         if (memory.containsKey(varName)) {
@@ -66,6 +75,7 @@ public class AdvancedCalculator {
         }
         System.out.println("Result: " + result);
       } catch (Exception e) {
+        // handling multiple signs
         System.out.println("Error in expression.");
       }
     }
