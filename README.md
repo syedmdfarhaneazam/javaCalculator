@@ -56,11 +56,14 @@ Commands: save <var>, recall <var>, clear, exit
 ```
 ### 📌 **Basic Calculation**
 ```
-Enter number or expression: 10
-Result: 10.0
-Enter number or expression: +
-Enter number or expression: 20
-Result: 30.0
+Enter number or expression: 25 / 5
+Result: 5.0
+Enter number or expression: save myValue
+Saved: 5.0
+Enter number or expression: sqrt(recall myValue)
+Result: 2.23606797749979
+Enter number or expression: clear
+Memory cleared.
 ```
 ### 📌 **Trigonometric Operations**
 ```
