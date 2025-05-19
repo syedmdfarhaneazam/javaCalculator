@@ -25,6 +25,7 @@ cat << "EOF"
 EOF
 echo -e "${RESET}"
 
+INSTALL_DIR="$HOME/.local/share/advance-calculator"
 # Determine script location regardless of symlinks
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
@@ -35,18 +36,15 @@ if ! command -v java &> /dev/null; then
     exit 1
 fi
 
-# Classes path - look in a few different places
-if [ -f "$SCRIPT_DIR/../src/AdvancedCalculator.class" ]; then
-    # Class is in src directory
-    CLASS_PATH="$SCRIPT_DIR/../src"
-elif [ -f "$SCRIPT_DIR/AdvancedCalculator.class" ]; then
-    # Class is in same directory as script
-    CLASS_PATH="$SCRIPT_DIR"
-elif [ -f "$SCRIPT_DIR/../AdvancedCalculator.class" ]; then
-    # Class is in parent directory
-    CLASS_PATH="$SCRIPT_DIR/.."
-else
-    echo -e "${RED}${BOLD}ERROR:${RESET} ${RED}Could not find compiled calculator class.${RESET}"
+# Check if Java is available
+if ! command -v java &> /dev/null; then
+    echo -e "${RED}${BOLD}ERROR:${RESET} ${RED}Java is not installed or not in PATH.${RESET}"
+    exit 1
+fi
+
+# Check if compiled class exists
+if [ ! -f "$INSTALL_DIR/AdvancedCalculator.class" ]; then
+    echo -e "${RED}${BOLD}ERROR:${RESET} ${RED}Could not find compiled calculator class at:${RESET} $INSTALL_DIR"
     echo -e "${YELLOW}Try reinstalling the calculator: ${CYAN}./scripts/install.sh${RESET}"
     exit 1
 fi
@@ -56,5 +54,5 @@ echo -e "${YELLOW}Starting Advanced Scientific Calculator...${RESET}"
 echo -e "${BLUE}--------------------------------------${RESET}"
 
 # Run the Java Calculator
-cd "$CLASS_PATH"
+cd "$INSTALL_DIR"
 java AdvancedCalculator
