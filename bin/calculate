@@ -25,7 +25,7 @@ cat << "EOF"
 EOF
 echo -e "${RESET}"
 
-INSTALL_DIR="$HOME/.local/share/advance-calculator"
+INSTALL_DIR="$HOME/.local/share/advanced-calculator"
 # Determine script location regardless of symlinks
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
