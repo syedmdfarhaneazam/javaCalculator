@@ -1,131 +1,126 @@
-# 📌 Advanced Scientific Calculator in Java  
+# Advanced Scientific Calculator
 
-![Java Logo](https://upload.wikimedia.org/wikipedia/en/3/30/Java_programming_language_logo.svg)
+A powerful command-line scientific calculator written in Java.
 
-### 🧮 A powerful **Scientific Calculator** built in Java with support for **trigonometric, logarithmic, arithmetic, and factorial operations**.
+## Features
 
----
+- Basic arithmetic operations (+, -, \*, /, %, ^)
+- Trigonometric functions (sin, cos, tan)
+- Inverse trigonometric functions (asin, acos, atan)
+- Other math functions (sqrt, log, ln, exp, abs, floor, ceil, round)
+- Variable storage and recall
+- Mathematical constants (pi, e)
+- Expression parsing with proper operator precedence
+- Support for parentheses and nested expressions
+- Color-coded output
 
-## 🚀 Features
-✅ Supports **Basic Arithmetic Operations** (`+`, `-`, `*`, `/`, `%`, `^`)
-✅ **Trigonometric Functions** (`sin`, `cos`, `tan`, `sec`, `cosec`, `cot`)
-✅ **Logarithmic Functions** (`log`, `ln`)
-✅ **Square Root Calculation** (`sqrt`)
-✅ **Factorial Calculation** (`!`)
-✅ **Memory Storage** (`save <var>`, `recall <var>`, `clear`)
-✅ **Supports Step-by-Step Computation**
-✅ **Error Handling for Invalid Inputs**
+## Installation
 
----
+### Automatic Installation (Linux/macOS)
 
-## 📖 Usage Manual
-### **Commands and Operations**
-```
-Basic Arithmetic:
-  - Addition (+), Subtraction (-), Multiplication (*), Division (/)
-  - Power (^), Modulo (%)
+1. Clone this repository:
 
-Trigonometry:
-  - sin(angle), cos(angle), tan(angle)
-  - sec(angle), cosec(angle), cot(angle)
+    ```
+    git clone https://github.com/syedmdfarhaneazam/javaCalculator
+    cd javaCalculator/scripts
+    ```
 
-Logarithms:
-  - log(value) -> Base 10
-  - ln(value)  -> Natural Logarithm
+2. Run the installation script:
 
-Special Functions:
-  - sqrt(value) -> Square Root
-  - n! -> Factorial
+    ```
+    ./install.sh
+    ```
 
-Memory Operations:
-  - save <var>  -> Saves the current result in memory
-  - recall <var> -> Retrieves saved value
-  - clear -> Resets calculator
-  - exit  -> Closes the calculator
-```
+3. Use the calculator from any terminal:
+    ```
+    calculate
+    ```
 
----
+### Manual Installation
 
-## 🖥️ Example Outputs
+1. Compile the Java file:
+
+    ```
+    javac AdvancedCalculator.java
+    ```
+
+2. Make the shell script executable:
+
+    ```
+    chmod +x calculate
+    ```
+
+3. Move both files to a directory in your PATH or create a symlink:
+
+    ```
+    # Option 1: Move files
+    sudo mv AdvancedCalculator.class /usr/local/bin/
+    sudo mv calculate /usr/local/bin/
+
+    # Option 2: Create a symlink
+    ln -s $(pwd)/calculate ~/.local/bin/calculate
+    ```
+
+## Usage
+
+Run the calculator:
+
 ```
-Advanced Scientific Calculator
-Operations: +, -, *, /, ^, %, sqrt, !
-Trigonometric: sin, cos, tan, sec, cosec, cot
-Logarithmic: log, ln
-Commands: save <var>, recall <var>, clear, exit
-```
-### 📌 **Basic Calculation**
-```
-Enter number or expression: 25 / 5
-Result: 5.0
-Enter number or expression: save myValue
-Saved: 5.0
-Enter number or expression: sqrt(recall myValue)
-Result: 2.23606797749979
-Enter number or expression: clear
-Memory cleared.
-```
-### 📌 **Trigonometric Operations**
-```
-Enter number or expression: sin(30)
-Result: 0.5
-Enter number or expression: cos(60)
-Result: 0.5
-```
-### 📌 **Complex Expression**
-```
-Enter number or expression: sqrt(144) + sin(45) * 10
-Result: 19.071
-```
-### 📌 **Factorial Calculation**
-```
-Enter number or expression: 5!
-Result: 120.0
-```
-### 📌 **Logarithmic Operations**
-```
-Enter number or expression: log(1000)
-Result: 3.0
-Enter number or expression: ln(2.718)
-Result: 1.0
+calculate
 ```
 
----
+### Example Commands
 
-## 🔧 How to Run
-1️⃣ **Compile the Code:**
-```sh
-javac AdvancedCalculator.java
-```
+- Basic calculations:
 
-2️⃣ **Run the Program:**
-```sh
-java AdvancedCalculator
-```
+    ```
+    > 5+4+9
+    > (5+4)*(6/7)
+    ```
 
-3️⃣ **Create an Alias in your ```.bashrc``` or ```.zshrc``` file:**
-paste->
-```sh
-alias runcalc='cd /path/to/your/directory && java AdvancedCalculator'
-```
+- Trigonometric functions:
 
-4️⃣  **Run it when you want:**
-```sh
-$ runcalc
-```
----
+    ```
+    > sin(80)+cos(60)
+    > tan(45)
+    ```
 
-## 📜 License
-This project is **open-source** and free to use. Contributions are welcome! 😃
+- Other functions:
 
----
+    ```
+    > sqrt(16)
+    > log(100)
+    ```
 
-## 💡 Future Improvements
-🚀 **Support for Parentheses in Expressions**
-🚀 **Graph Plotting for Functions**
-🚀 **GUI Version using JavaFX**
+- Using constants:
 
----
+    ```
+    > pi*2
+    > e^2
+    ```
 
-**👨‍💻 Created in Java**
+- Variable management:
+    ```
+    > save x 10
+    > save y 20
+    > x+y
+    > recall
+    ```
 
+### Commands
+
+- `exit` - Quit the calculator
+- `clear` - Reset current result to 0
+- `save [name]` - Save current result to variable
+- `save [name] [expression]` - Evaluate expression and save to variable
+- `recall` - Show all saved variables
+- `recall [name]` - Show specific variable value
+- `help` - Display help menu
+
+## Requirements
+
+- Java Runtime Environment (JRE) 8 or higher
+
+## License
+
+MIT License
