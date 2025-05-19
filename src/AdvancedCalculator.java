@@ -19,6 +19,7 @@ public class AdvancedCalculator {
         System.out.println(YELLOW + "Enter expressions (type 'exit' to quit)" + RESET);
         System.out.println(YELLOW + "Examples: sin(80)+cos(60), 5+4+9, (5+4)*(6/7)" + RESET);
         System.out.println(YELLOW + "Functions: sin, cos, tan, sqrt, log, exp, etc." + RESET);
+        System.out.println(YELLOW + "Advanced Functions: save, recall, help, reset ,clear" + RESET);
 
         while (true) {
             System.out.print(CYAN + "> " + RESET);
